@@ -6,56 +6,26 @@ const { upload } = require("../../multer/multerstore");
 
 router.post('/add-product', async (req, res) => {
     try {
-        const { codeUrl, productName, productDescription, price, Rating, categoryType, projectType, projectUrl,Image1} = req.body;
-        // console.log(req.body);
-        const uploadedImage = await uploadFile(req.body.image, "products");
-        let uploadedImage1;
-        let uploadedImage2;
-        if(req.body.image1){
+        const { codeUrl, productName, productDescription, price, Rating, categoryType, projectType, projectUrl,productImage1,productImage2,productImage3,productImage4,productImage5} = req.body;
+        
+        const newProduct = new Product({
+            productName,
+            productDescription,
+            price,
+            Rating,
+            categoryType,
+            projectType,
+            projectUrl,
+            productImage1,
+            productImage2,
+            productImage3,
+            productImage4,
+            productImage5,
+            codeUrl
+        });
+        await newProduct.save();
 
-            uploadedImage1 = await uploadFile(req.body.image1, "products");
-        }
-        if(req.body.image2){
-
-            uploadedImage2 = await uploadFile(req.body.image2, "products");
-        }
-
-        res.json({uploadedImage,uploadedImage1,uploadedImage2});
-    //     if (!codeUrl || !productName || !productDescription || !price || !categoryType || !projectType) {
-    //         return res.status(400).json({ message: 'Missing required fields' });
-    //     }
-
-    //     let productImages = [];
-    //     await Promise.all(req.files.map(async (file) => {
-    //         const uploadedImage = await uploadFile(file.path, "products");
-    //         console.log(uploadedImage);
-    //         productImages.push(uploadedImage);
-    //     }));
-    //     console.log(productImages);
-    //   let productImage1=productImages[0]
-    //   let productImage2=productImages[1]
-    //   let productImage3=productImages[2]
-    //   let productImage4=productImages[3]
-    //   let productImage5=productImages[4];
-
-    //     const newProduct = new Product({
-    //         productName,
-    //         productDescription,
-    //         price,
-    //         Rating,
-    //         categoryType,
-    //         projectType,
-    //         projectUrl,
-    //         productImage1,
-    //         productImage2,
-    //         productImage3,
-    //         productImage4,
-    //         productImage5,
-    //         codeUrl
-    //     });
-    //     await newProduct.save();
-
-    //     res.status(200).json({ message: 'Successfully added product', newProduct });
+        res.status(200).json({ message: 'Successfully added product', newProduct });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to add product', error: error.message });
