@@ -4,15 +4,14 @@ const path = require('path');
 
 const upload = (folderName) => {
   const uploadDir = path.join(__dirname, 'uploads', folderName);
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  } else {
-    // Remove existing files from the upload directory
-    fs.readdirSync(uploadDir).forEach((file) => {
-      const filePath = path.join(uploadDir, file);
-      fs.unlinkSync(filePath);
-    });
-  }
+  // if (!fs.existsSync(uploadDir)) {
+  //   fs.mkdirSync(uploadDir, { recursive: true });
+  // } else {
+  //   fs.readdirSync(uploadDir).forEach((file) => {
+  //     const filePath = path.join(uploadDir, file);
+  //     fs.unlinkSync(filePath);
+  //   });
+  // }
 
   return multer({
     storage: multer.diskStorage({
