@@ -13,7 +13,8 @@ const path = require('path');
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,'uploads')));
+// app.use(express.static(path.join(__dirname,'uploads')));
+app.use(express.static(path.join(__dirname, 'multer', 'uploads')));
 
 // const userRouter = require('./api/users/user');
 // const authRouter = require('./api/users/auth');
