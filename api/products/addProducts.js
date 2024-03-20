@@ -9,13 +9,15 @@ router.post('/add-product', async (req, res) => {
         const { codeUrl, productName, productDescription, price, Rating, categoryType, projectType, projectUrl,Image1} = req.body;
         // console.log(req.body);
         const uploadedImage = await uploadFile(req.body.image, "products");
+        let uploadedImage1;
+        let uploadedImage2;
         if(req.body.image1){
 
-            const uploadedImage1 = await uploadFile(req.body.image1, "products");
+            uploadedImage1 = await uploadFile(req.body.image1, "products");
         }
         if(req.body.image2){
 
-            const uploadedImage2 = await uploadFile(req.body.image2, "products");
+            uploadedImage2 = await uploadFile(req.body.image2, "products");
         }
 
         res.json({uploadedImage,uploadedImage1,uploadedImage2});
